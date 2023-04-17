@@ -3,6 +3,7 @@ import RoomContext from "../Context/RoomContext";
 
 function OtherForm({nth, name}) {
 
+
     const [device, setDevice] = useState(
         {
             deviceName : '',
@@ -55,7 +56,16 @@ function OtherForm({nth, name}) {
     
     let submitData = e => {
         e.preventDefault();
-        console.log(device)
+        
+        let newDevice = device;
+
+        // axios.post('/api/rooms/', newDevice)
+        // .then(response => {
+        //     console.log(response.data);
+        // })
+        // .catch(error => {
+        //     console.log('error');
+        // });
     }
 
     return (

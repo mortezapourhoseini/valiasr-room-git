@@ -31,3 +31,5 @@ class FormView(viewsets.ModelViewSet):
     queryset = Case.objects.all()
     serializer_class = DeviceSerializer
     queryset = Device.objects.all()
+
+

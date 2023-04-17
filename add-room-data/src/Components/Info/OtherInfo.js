@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import OtherForm from "./OtherForm";
+import OtherForm from "./OtherForm.js";
 
 function OtherInfo({name}) {
 
