@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" con` tent="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Log in</title>
+  </head>
+  <body>
+
+    <div class="container">
+      <header>
+        <div className="navbar navbar-dark back-dark shadow-m m-1 mt-2 rounded">
+            <div className="container d-flex justify-content-between ">
+                <button className="btn btn-danger">خروج</button>
+                <a href="#" className="navbar-brand d-flex align-items-center">
+                    <strong>دانشگاه ولی عصر رفسنجان</strong>
+                </a>
+            </div>
+        </div>     
+    </header>
+      <div class="wrapper">
+        <div class="title"><span>ورود به سایت</span></div>
+        <form action="#" method="post">
+          <div class="row">
+            <i class="fas fa-user"></i>
+            <input
+              type="text"
+              minlength="9"
+              placeholder="شماره دانشجویی"
+              autofocus
+              required
+            />
+          </div>
+          <div class="row">
+            <i class="fas fa-lock"></i>
+            <input
+              type="password"
+              minlength="10"
+              placeholder="کد ملی"
+              required
+            />
+          </div>
+          <div class="row button">
+            <input type="submit" value="ورود" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
