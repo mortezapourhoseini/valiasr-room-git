@@ -41,7 +41,7 @@ function Room() {
         
         let newRoom = room;
 
-        api.post('/api/rooms/', newRoom)
+        api.post('/api/room/', newRoom)
         .then(response =>{
             console.log(response);
         })

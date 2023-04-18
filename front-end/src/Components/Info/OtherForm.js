@@ -44,7 +44,7 @@ function OtherForm({nth, name}) {
             roomNumber : roomContext.room.roomNumber,
         };
 
-        api.post('/api/rooms/', newDevice)
+        api.post('/api/device/', newDevice)
         .then(response =>{
             console.log(response);
         })

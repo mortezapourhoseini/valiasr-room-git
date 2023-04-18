@@ -165,7 +165,7 @@ function CaseForm({nth}) {
         
         let newCaseInfo = caseInfo;
 
-        api.post('/api/rooms/', newCaseInfo)
+        api.post('/api/case/', newCaseInfo)
         .then(response =>{
             console.log(response);
         })

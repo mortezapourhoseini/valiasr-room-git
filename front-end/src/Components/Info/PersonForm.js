@@ -75,7 +75,7 @@ function PersonForm({nth}) {
         
         let newPerson = person;
 
-        api.post('/api/rooms/', newPerson)
+        api.post('/api/master/', newPerson)
         .then(response =>{
             console.log(response);
         })
