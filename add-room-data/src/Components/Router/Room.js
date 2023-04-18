@@ -17,10 +17,26 @@ function Room() {
         {
             college : '',
             roomNumber : '',
+            roomTel : '',
+            node : '',
+            antennaStatus : '',
         }
     )
 
+    
+
     const stuContext = useContext(StuContext)
+
+    let addToRoom = (name, value)=>{
+        setState(
+            {
+                ...state,
+                name : value,
+            }
+        )
+
+        console.log(state);
+    }
 
     let addCollege = text =>{
         setState(
@@ -40,12 +56,18 @@ function Room() {
         )
     }
 
+    let submitRoom = ()=>{
+        stuContext.plus;
+
+    }
+
     return (
         <div className="room">
             <RoomContext.Provider value={{
                 state : state,
                 college : addCollege,
                 roomNumber : addRoomNumber,
+                addToRoom : addToRoom,
             }}>
                 <RoomForm />
                 <PersonInfo />
@@ -60,7 +82,7 @@ function Room() {
                 <div className="footer "> 
                     <Link to="/" 
                             className="c-light text-decoration-none hover-none person-form rounded back-dark m-2 p-3 fs-6 fw-bold"
-                            onClick={stuContext.plus} >
+                            onClick={submitRoom} >
                         ثبت اتاق
                     </Link>
                 </div>

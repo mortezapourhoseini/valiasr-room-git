@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import RoomContext from "../Context/RoomContext";
+import api from "../../Api/api";
 
 function PersonForm({nth}) {
 
@@ -71,7 +72,16 @@ function PersonForm({nth}) {
     
     let submitData = e => {
         e.preventDefault();
-        console.log(person);
+
+        let newPerson = person;
+
+        api.post('/api/rooms/', newPerson)
+        .then(response =>{
+            console.log(response);
+        })
+        .catch(err =>{
+            console.log(err);
+        })
     }
 
     return (

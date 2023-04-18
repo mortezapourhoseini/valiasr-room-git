@@ -10,42 +10,51 @@ import OtherInfo from "../Info/OtherInfo";
 
 //Context
 import StuContext from "../Context/StuContext";
+import api from "../Api/api";
 
 function Room() {
 
-    const [state, setState] = useState(
+    const [room, setRoom] = useState(
         {
             college : '',
             roomNumber : '',
+            roomTel : '',
+            node : '',
+            antennaStatus : '',
         }
     )
 
     const stuContext = useContext(StuContext)
 
-    let addCollege = text =>{
-        setState(
+    let addToRoom = (name, value) =>{
+        setRoom(
             {
-                ...state,
-                college : text,
+                ...room,
+                [name] : value,
             }
         )
     }
 
-    let addRoomNumber = text =>{
-        setState(
-            {
-                ...state,
-                roomNumber : text,
-            }
-        )
+    let submitRoom = ()=>
+    {
+        stuContext.plus();
+        
+        let newRoom = room;
+
+        api.post('/api/rooms/', newRoom)
+        .then(response =>{
+            console.log(response);
+        })
+        .catch(err =>{
+            console.log(err);
+        })
     }
 
     return (
         <div className="room">
             <RoomContext.Provider value={{
-                state : state,
-                college : addCollege,
-                roomNumber : addRoomNumber,
+                room : room,
+                addToRoom : addToRoom,
             }}>
                 <RoomForm />
                 <PersonInfo />
@@ -60,7 +69,7 @@ function Room() {
                 <div className="footer "> 
                     <Link to="/" 
                             className="c-light text-decoration-none hover-none person-form rounded back-dark m-2 p-3 fs-6 fw-bold"
-                            onClick={stuContext.plus} >
+                            onClick={submitRoom} >
                         ثبت اتاق
                     </Link>
                 </div>

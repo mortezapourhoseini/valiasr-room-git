@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
 import RoomContext from "../Context/RoomContext";
+import api from "../Api/api";
+
 
 function OtherForm({nth, name}) {
 
@@ -19,43 +21,38 @@ function OtherForm({nth, name}) {
 
     let toogleSub = e =>{
         setSub(!sub);
-        setDevice(
-            {
-                ...device,
-                deviceName : name,
-                college : roomContext.state.college,
-                roomNumber : roomContext.state.roomNumber,
-            }
-        )
     }
 
     let inputHandler = e =>{
-        let target = e.target.id;
-        let value = e.target.value;
+        const {name, value} = e.target;
 
-        switch (target) {
-            case 'deviceModel':
-                setDevice(
-                    {
-                        ...device,
-                        deviceModel : value,
-                    }
-                )
-                break;
-            case 'deviceID':
-                setDevice(
-                    {
-                        ...device,
-                        deviceID : value,
-                    }
-                )
-                break;
-        }
+        setDevice(
+            {
+                ...device,
+                [name] : value,
+            }
+        )
     }
     
     let submitData = e => {
         e.preventDefault();
-        console.log(device)
+        
+        let newDevice = {
+            ...device,
+            deviceName : name,
+            college : roomContext.room.college,
+            roomNumber : roomContext.room.roomNumber,
+        };
+
+        api.post('/api/rooms/', newDevice)
+        .then(response =>{
+            console.log(response);
+        })
+        .catch(err =>{
+            console.log(err);
+        })
+        
+        console.log(newDevice)
     }
 
     return (
@@ -68,11 +65,11 @@ function OtherForm({nth, name}) {
                                 <div className="form-group pe-1 room-form">
                                     <label htmlFor="#deviceModel" className="c-text f-s">
                                         مدل :
-                                        <input type="text" name="" id="deviceModel" className="form-control tada" onChange={inputHandler}/>
+                                        <input type="text" name="deviceModel" id="deviceModel" className="form-control tada" onChange={inputHandler}/>
                                     </label>
                                     <label htmlFor="#deviceID" className="c-text f-s">
                                         شماره اموال :
-                                        <input type="text" name="" id="deviceID" className="form-control"onChange={inputHandler}/>
+                                        <input type="text" name="deviceID" id="deviceID" className="form-control"onChange={inputHandler}/>
                                     </label>
                                     <button type="submit" className="btn btn-primary">ثبت</button>
                                 </div>

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import RoomContext from "../Context/RoomContext";
+import api from "../Api/api";
 
 function CaseForm({nth}) {
 
@@ -33,8 +34,8 @@ function CaseForm({nth}) {
         setCaseInfo(
             {
                 ...caseInfo,
-                college : roomContext.state.college,
-                roomNumber : roomContext.state.roomNumber,
+                college : roomContext.room.college,
+                roomNumber : roomContext.room.roomNumber,
             }
         )
     }
@@ -161,6 +162,17 @@ function CaseForm({nth}) {
 
     let submitData = e => {
         e.preventDefault();
+        
+        let newCaseInfo = caseInfo;
+
+        api.post('/api/rooms/', newCaseInfo)
+        .then(response =>{
+            console.log(response);
+        })
+        .catch(err =>{
+            console.log(err);
+        })
+
         console.log(caseInfo)
     }
     

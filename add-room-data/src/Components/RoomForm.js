@@ -1,57 +1,59 @@
 import React, { useContext, useState } from "react";
 import RoomContext from "./Context/RoomContext";
 
+
+
 function RoomForm() {
 
-    const [room, setRoom] = useState({
-        college : '',
-        roomNumber : '',
-        roomTel : '',
-        node : '',
-        antennaStatus : '',
-    })
+    // const [room, setRoom] = useState({
+    //     roomTel : '',
+    //     node : '',
+    //     antennaStatus : '',
+    // })
 
     const roomContext = useContext(RoomContext);
 
     let inputHandler = e =>{
-        let target = e.target.id;
-        let value = e.target.value;
-
-        switch (target) {
-            case 'college':
-                setRoom({
-                    ...room,
-                    college : value,
-                });
-                roomContext.college(value);
-                break;
-            case 'roomNumber':
-                setRoom({
-                    ...room,
-                    roomNumber : value,
-                });
-                roomContext.roomNumber(value);
-                break;
-            case 'roomTel':
-                setRoom({
-                    ...room,
-                    roomTel : value,
-                })
-                break;
-            case 'node':
-                setRoom({
-                    ...room,
-                    node : value,
-                })
-                break;
-            case 'antennaStatus':
-                setRoom({
-                    ...room,
-                    antennaStatus : value,
-                })
-                break;
-        }
+        console.log();
     }
+
+    // let inputHandler = e =>{
+        // let target = e.target.id;
+        // let value = e.target.value;
+
+        // let [name, value] = e.target;
+        
+
+        // roomContext.addToRoom(name, value);
+
+        
+        // switch (target) {
+        //     case 'college':
+        //         roomContext.college(value);
+        //         break;
+        //     case 'roomNumber':
+        //         roomContext.roomNumber(value);
+        //         break;
+        //     case 'roomTel':
+        //         setRoom({
+        //             ...room,
+        //             roomTel : value,
+        //         })
+        //         break;
+        //     case 'node':
+        //         setRoom({
+        //             ...room,
+        //             node : value,
+        //         })
+        //         break;
+        //     case 'antennaStatus':
+        //         setRoom({
+        //             ...room,
+        //             antennaStatus : value,
+        //         })
+        //         break;
+        // }
+    // }
 
 
 
@@ -63,7 +65,7 @@ function RoomForm() {
 
                 <label htmlFor="#roomNumber" className="c-text f-m">
                         دانشکده :
-                        <select class="form-select form-select-lg c-option" id="college" aria-label=".form-select-lg example" onChange={inputHandler}>
+                        <select class="form-select form-select-lg c-option" id="college" name="college" aria-label=".form-select-lg example" onChange={inputHandler}>
                         <option selected disabled >نام دانشکده</option>
                         <option value="فنی مهندسی">فنی مهندسی</option>
                         <option value="علوم پایه">علوم پایه</option>
@@ -74,19 +76,19 @@ function RoomForm() {
                     </label>
                     <label htmlFor="#roomNumber" className="c-text f-m">
                         شماره اتاق :
-                        <input type="number" name="" id="roomNumber" minLength={1} className="form-control" onChange={inputHandler}/>
+                        <input type="number" name="roomNumber" id="roomNumber" minLength={1} className="form-control" onChange={inputHandler}/>
                     </label>
                     <label htmlFor="#roomTel" className="c-text f-m">
                         تلفن ثابت اتاق :
-                        <input type="tel" name="" id="roomTel" placeholder="مثال : 34279346" className="form-control" onChange={inputHandler}/>
+                        <input type="tel" name="roomTel" id="roomTel" placeholder="مثال : 34279346" className="form-control" onChange={inputHandler}/>
                     </label>
                     <label htmlFor="#node" className="c-text f-m">
                         تعداد node :
-                        <input type="number" name="" id="node" placeholder="" className="form-control" onChange={inputHandler}/>
+                        <input type="number" name="node" id="node" placeholder="" className="form-control" onChange={inputHandler}/>
                     </label>
                     <label htmlFor="#anten" className="c-text f-m">
                         وضعیت آنتن دهی :
-                        <input type="number" name="" min={1} max={3} id="antennaStatus" placeholder="1-3" className="form-control" onChange={inputHandler}/>
+                        <input type="number" name="antennaStatus" min={1} max={3} id="antennaStatus" placeholder="1-3" className="form-control" onChange={inputHandler}/>
                     </label>
                 </div>
             </form>

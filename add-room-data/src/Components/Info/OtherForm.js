@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import RoomContext from "../Context/RoomContext";
+import api from "../../Api/api";
+
 
 function OtherForm({nth, name}) {
-
 
     const [device, setDevice] = useState(
         {
@@ -59,13 +60,15 @@ function OtherForm({nth, name}) {
         
         let newDevice = device;
 
-        // axios.post('/api/rooms/', newDevice)
-        // .then(response => {
-        //     console.log(response.data);
-        // })
-        // .catch(error => {
-        //     console.log('error');
-        // });
+        console.log(newDevice);
+
+        api.post('/api/rooms/', newDevice)
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.log('error');
+        });
     }
 
     return (
