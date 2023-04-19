@@ -2,34 +2,37 @@ from django.db import models
 
 
 class Room(models.Model):
-    room = models.CharField(max_length=8)
+    user = models.CharField(max_length=32)
+    roomNumber = models.CharField(max_length=8)
     college = models.CharField(max_length=32)
-    room_tell = models.CharField(max_length=32, blank=True, null=True)
+    roomTel = models.CharField(max_length=32, blank=True, null=True)
     node = models.CharField(max_length=2, blank=True, null=True)
-    antenna = models.CharField(max_length=32, blank=True, null=True)
+    antennaStatus = models.CharField(max_length=32, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.college} {self.room}"
+        return f"{self.college} {self.roomNumber}"
 
 
 class Master(models.Model):
+    user = models.CharField(max_length=32)
     college = models.CharField(max_length=32)
-    room = models.CharField(max_length=8)
-    first_name = models.CharField(max_length=32)
-    last_name = models.CharField(max_length=32)
-    code_meli = models.CharField(max_length=16)
-    phone_number = models.CharField(max_length=32)
+    roomNumber = models.CharField(max_length=8)
+    name = models.CharField(max_length=32)
+    family = models.CharField(max_length=32)
+    personId = models.CharField(max_length=16)
+    phone = models.CharField(max_length=32)
 
     def __str__(self):
         return f"{self.college} {self.room} {self.first_name} {self.last_name}"
     
     
 class Case(models.Model):
+    user = models.CharField(max_length=32)
     college = models.CharField(max_length=32)
-    room = models.CharField(max_length=8)
+    roomNumber = models.CharField(max_length=8)
     model = models.CharField(max_length=32)
-    property_number = models.CharField(max_length=64)
-    ID_IT = models.CharField(max_length=32)
+    propertyNum = models.CharField(max_length=64)
+    idIt = models.CharField(max_length=32)
     mb = models.CharField(max_length=32)
     cpu = models.CharField(max_length=32)
     ram = models.CharField(max_length=32)
@@ -40,18 +43,19 @@ class Case(models.Model):
     dvd = models.CharField(max_length=32, blank=True, null=True)
     vga = models.CharField(max_length=32, blank=True, null=True)
     os = models.CharField(max_length=10)
-    software = models.TextField()
+    soft = models.TextField()
     
     def __str__(self):
-        return f"{self.college} {self.room} case: {self.property_number}"
+        return f"{self.college} {self.roomNumber} case: {self.propertyNum}"
     
     
 class Device(models.Model):
+    user = models.CharField(max_length=32)
     college = models.CharField(max_length=32)
-    room = models.CharField(max_length=8)
-    name = models.CharField(max_length=32)
-    model = models.CharField(max_length=32)
-    property_number = models.CharField(max_length=64)
+    roomNumber = models.CharField(max_length=8)
+    deviceName = models.CharField(max_length=32)
+    deviceModel = models.CharField(max_length=32)
+    deviceID = models.CharField(max_length=64)
 
     def __str__(self):
-        return f"{self.college} {self.room} {self.name}: {self.property_number}"
+        return f"{self.college} {self.roomNumber} {self.deviceName}: {self.deviceID}"

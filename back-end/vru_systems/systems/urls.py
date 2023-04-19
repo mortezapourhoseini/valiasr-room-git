@@ -3,7 +3,7 @@ from .views import *
 
 
 urlpatterns = [
-    path('api/room/', RoomAPI.as_view(), name='api'),
+    path('api/room/', RoomAPI.as_view()),
     path('api/master/', MasterAPI.as_view()),
     path('api/case/', CaseAPI.as_view()),
     path('api/device/', DeviceAPI.as_view()),
