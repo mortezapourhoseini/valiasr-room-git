@@ -7,21 +7,6 @@ from rest_framework.generics import ListCreateAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
-
-
-@csrf_exempt
-def login_view(request):
-    if request.method == 'GET':
-        return render(request, 'login.html')
-
-    elif request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user:
-            login(request, user) 
-            return redirect('/')
-        return redirect('login_view')
     
 
 class RoomAPI(ListCreateAPIView):
@@ -30,9 +15,7 @@ class RoomAPI(ListCreateAPIView):
     serializer_class = RoomSerializer    
     
     def post(self, request):
-        data = request.data
-        data['user'] = request.user.username
-        serializer = RoomSerializer(data=data)
+        serializer = RoomSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -45,9 +28,7 @@ class MasterAPI(ListCreateAPIView):
     serializer_class = MasterSerializer    
 
     def post(self, request):
-        data = request.data
-        data['user'] = request.user.username
-        serializer = MasterSerializer(data=data)
+        serializer = MasterSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -60,9 +41,7 @@ class CaseAPI(ListCreateAPIView):
     serializer_class = CaseSerializer    
 
     def post(self, request):
-        data = request.data
-        data['user'] = request.user.username
-        serializer = CaseSerializer(data=data)
+        serializer = CaseSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -75,9 +54,7 @@ class DeviceAPI(ListCreateAPIView):
     serializer_class = DeviceSerializer    
 
     def post(self, request):
-        data = request.data
-        data['user'] = request.user.username
-        serializer = DeviceSerializer(data=data)
+        serializer = DeviceSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
