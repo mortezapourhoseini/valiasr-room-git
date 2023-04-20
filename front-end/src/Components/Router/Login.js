@@ -4,7 +4,7 @@ import StuContext from "../Context/StuContext";
 import api from "../Api/api";
 import { Link } from "react-router-dom";
 
-function Login() {
+function Login({value}) {
 
     const stucontext = useContext(StuContext);
 
@@ -16,19 +16,19 @@ function Login() {
     let login = e =>{
         e.preventDefault();
 
-        const {username, pass} = stucontext.student;
+        const {username, pass, isValid} = stucontext.student;
 
         let newUser = {
             username : username,
             pass : pass,
         };
 
-        api.post('/api/users/', newUser)
+        api.post('/api/auth/', newUser)
         .then(response =>{
-            console.log(response);
+            isValid(response.data.token);
         })
         .catch(err =>{
-            console.log(err);
+            isValid("");
         })
         
         console.log(newUser);
@@ -69,6 +69,13 @@ function Login() {
                         <button type="submit" className="btn btn-secondary btn-block mb-2">
                         ورود
                         </button>
+                        {
+                            !value 
+                            ? (
+                                <h4 className="dangar">نامعتبر</h4>
+                            )
+                            : ""
+                        }
                     </form>
                     </div>
                 </div>

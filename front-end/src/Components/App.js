@@ -31,6 +31,8 @@ function App() {
     counter : newCounter
   });
 
+  const [valid, setValid] = useState(false);
+
   let addUser = (name, value) =>{
     setStudent(
       {
@@ -55,6 +57,17 @@ function App() {
     );
     
   }
+
+  let permis = token =>{
+    if (token.lentgh != 0)
+    {
+      setValid(true);
+    }
+    else
+    {
+      setValid(false);
+    }
+  }
     
  
   return (
@@ -67,14 +80,26 @@ function App() {
           counter: student.counter,
           addUser : addUser,
           plus: counterPlus,
+          isValid : permis,
         }}
       >
         <BrowserRouter>
           <Routes>
-            <Route exact path="/" element={<Login />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/room" element={<Room />} />
-            <Route path="*" element={<Notfound />} />
+            <Route exact path="/" element={<Login value={true}/>} />
+            {
+              valid 
+              ? (
+                 <Route path="/home" element={<Home />} >
+                  <Route path="/room" element={<Room />} />
+                  <Route path="*" element={<Notfound />} />
+                </Route>
+              )
+              : (
+                <Route path="*" element={<Login value={false}/>} />
+              )
+            }
+           
+            
           </Routes>
         </BrowserRouter>
       </StuContext.Provider>
