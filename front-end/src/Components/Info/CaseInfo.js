@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import CaseForm from "./CaseForm";
+import Submited from "./submited";
 
 function CaseInfo() {
 
-    const [views, setViews] = useState([1]);
+    const [views, setViews] = useState(
+        [ { nth : 1, lock : false} ]
+    );
 
     let numHandler = e => {
         let n = e.target.value;
@@ -13,14 +16,21 @@ function CaseInfo() {
 
             for (let i = 1 ; i <= n ; i++)
             {
-                view.push(i)
+                view.push(
+                    {
+                        nth : i,
+                        lock : false
+                    }
+                )
             }
 
             setViews(view);
+
+            console.log(views)
         }
         else {
             alert("Unvalid number");
-            setViews([1]);
+            setViews([{ nth : 1, lock : false}]);
         }
     }
 
@@ -34,7 +44,9 @@ function CaseInfo() {
             <hr />
             <div className="area">
                 {
-                    views.map(item => <CaseForm nth={item} key={Date.now} />)
+                    views.map(item =>{
+                      return item.lock ? (<Submited />) : (<CaseForm nth={item.nth} key={Date.now} />)
+                    })
                 }
             </div>
         </div>

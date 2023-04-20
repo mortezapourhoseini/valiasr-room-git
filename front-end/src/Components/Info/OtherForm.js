@@ -1,9 +1,14 @@
 import React, { useContext, useState } from "react";
+
+//context
 import RoomContext from "../Context/RoomContext";
+import StuContext from "../Context/StuContext";
+
+//axios
 import api from "../Api/api";
 
 
-function OtherForm({nth, name}) {
+function OtherForm({nth, name, data}) {
 
     const [device, setDevice] = useState(
         {
@@ -12,12 +17,14 @@ function OtherForm({nth, name}) {
             deviceID : '',
             college : '',
             roomNumber : '',
+            username : '',
         }
     )
 
     const [sub, setSub] = useState(false);
 
     const roomContext = useContext(RoomContext);
+    const stucontext = useContext(StuContext);
 
     let toogleSub = e =>{
         setSub(!sub);
@@ -39,9 +46,10 @@ function OtherForm({nth, name}) {
         
         let newDevice = {
             ...device,
-            deviceName : name,
+            deviceName : data,
             college : roomContext.room.college,
             roomNumber : roomContext.room.roomNumber,
+            username : stucontext.student.username,
         };
 
         api.post('/api/device/', newDevice)
@@ -65,11 +73,11 @@ function OtherForm({nth, name}) {
                                 <div className="form-group pe-1 room-form">
                                     <label htmlFor="#deviceModel" className="c-text f-s">
                                         مدل :
-                                        <input type="text" name="deviceModel" id="deviceModel" className="form-control tada" onChange={inputHandler}/>
+                                        <input required type="text" name="deviceModel" id="deviceModel" className="form-control tada" onChange={inputHandler}/>
                                     </label>
                                     <label htmlFor="#deviceID" className="c-text f-s">
                                         شماره اموال :
-                                        <input type="text" name="deviceID" id="deviceID" className="form-control"onChange={inputHandler}/>
+                                        <input required type="text" name="deviceID" id="deviceID" className="form-control"onChange={inputHandler}/>
                                     </label>
                                     <button type="submit" className="btn btn-primary">ثبت</button>
                                 </div>

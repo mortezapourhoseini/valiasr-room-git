@@ -1,5 +1,10 @@
 import React, { useContext, useState } from "react";
+
+//context
 import RoomContext from "../Context/RoomContext";
+import StuContext from "../Context/StuContext";
+
+//axios
 import api from "../Api/api";
 
 function PersonForm({nth}) {
@@ -8,6 +13,7 @@ function PersonForm({nth}) {
         {
             college : '',
             roomNumber : '',
+            username : '',
             name : '',
             family : '',
             personId : '',
@@ -18,6 +24,7 @@ function PersonForm({nth}) {
     const [sub, setSub] = useState(false);
 
     const roomContext = useContext(RoomContext);
+    const stucontext = useContext(StuContext);
 
     let toogleSub = e =>{
         setSub(!sub);
@@ -26,6 +33,7 @@ function PersonForm({nth}) {
                 ...person,
                 college : roomContext.room.college,
                 roomNumber : roomContext.room.roomNumber,
+                username : stucontext.student.username,
             }
         )
     }
@@ -96,19 +104,19 @@ function PersonForm({nth}) {
                                 <div className="form-group pe-1 room-form">
                                     <label htmlFor="#personName" className="c-text f-s">
                                         نام فرد :
-                                        <input type="text" name="" id="personName" className="form-control tada" onChange={inputHandler}/>
+                                        <input required type="text" name="" id="personName" className="form-control tada" onChange={inputHandler}/>
                                     </label>
                                     <label htmlFor="#personFamily" className="c-text f-s">
                                         نام خانوادگی :
-                                        <input type="text" name="" id="personFamily" className="form-control" onChange={inputHandler}/>
+                                        <input required type="text" name="" id="personFamily" className="form-control" onChange={inputHandler}/>
                                     </label>
                                     <label htmlFor="#personId" className="c-text f-s">
                                         کد ملی :
-                                        <input type="" name="" id="personId" className="form-control" onChange={inputHandler}/>
+                                        <input required type="" name="" id="personId" className="form-control" onChange={inputHandler}/>
                                     </label>
                                     <label htmlFor="#personTel" className="c-text f-s">
                                         شماره همراه :
-                                        <input type="tel" name="" id="personTel" className="form-control" onChange={inputHandler}/>
+                                        <input required type="tel" name="" id="personTel" className="form-control" onChange={inputHandler}/>
                                     </label>
                                     <button type="submit" className="btn btn-primary" onClick={submitData}>ثبت</button>
                                 </div>

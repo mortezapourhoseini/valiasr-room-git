@@ -10,6 +10,8 @@ import OtherInfo from "../Info/OtherInfo";
 
 //Context
 import StuContext from "../Context/StuContext";
+
+//axios
 import api from "../Api/api";
 
 function Room() {
@@ -18,6 +20,7 @@ function Room() {
         {
             college : '',
             roomNumber : '',
+            username : '',
             roomTel : '',
             node : '',
             antennaStatus : '',
@@ -39,7 +42,10 @@ function Room() {
     {
         stuContext.plus();
         
-        let newRoom = room;
+        let newRoom = {
+            ...room,
+            username : stuContext.student.username,
+        };
 
         api.post('/api/room/', newRoom)
         .then(response =>{
@@ -59,15 +65,15 @@ function Room() {
                 <RoomForm />
                 <PersonInfo />
                 <CaseInfo />
-                <OtherInfo name={'مانیتور'} />
-                <OtherInfo name={'پرینتر'} />
-                <OtherInfo name={'اسکنر'} />
-                <OtherInfo name={'چهارکاره '} />
-                <OtherInfo name={'فکس '} />
-                <OtherInfo name={'وایرلس '} />
-                <OtherInfo name={'سوییچ '} />
+                <OtherInfo name={'مانیتور'} data={'manitor'} />
+                <OtherInfo name={'پرینتر'} data={'printer'} />
+                <OtherInfo name={'اسکنر'} data={'scanner'} />
+                <OtherInfo name={'چهارکاره '} data={'quadruple'} />
+                <OtherInfo name={'فکس '} data={'fax'} />
+                <OtherInfo name={'وایرلس '} data={'wireless'} />
+                <OtherInfo name={'سوییچ '} data={'switch'} />
                 <div className="footer "> 
-                    <Link to="/" 
+                    <Link to="/home" 
                             className="c-light text-decoration-none hover-none person-form rounded back-dark m-2 p-3 fs-6 fw-bold"
                             onClick={submitRoom} >
                         ثبت اتاق

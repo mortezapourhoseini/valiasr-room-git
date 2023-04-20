@@ -34,19 +34,19 @@ function RoomForm() {
                     </label>
                     <label htmlFor="#roomNumber" className="c-text f-m">
                         شماره اتاق :
-                        <input type="number" name="roomNumber" id="roomNumber" minLength={1} className="form-control" onChange={inputHandler}/>
+                        <input required type="number" name="roomNumber" id="roomNumber" minLength={1} className="form-control" onChange={inputHandler}/>
                     </label>
                     <label htmlFor="#roomTel" className="c-text f-m">
                         تلفن ثابت اتاق :
-                        <input type="tel" name="roomTel" id="roomTel" placeholder="مثال : 34279346" className="form-control" onChange={inputHandler}/>
+                        <input required type="tel" name="roomTel" id="roomTel" placeholder="مثال : 34279346" className="form-control" onChange={inputHandler}/>
                     </label>
                     <label htmlFor="#node" className="c-text f-m">
                         تعداد node :
-                        <input type="number" name="node" id="node" placeholder="" className="form-control" onChange={inputHandler}/>
+                        <input required type="number" name="node" id="node" placeholder="" className="form-control" onChange={inputHandler}/>
                     </label>
                     <label htmlFor="#anten" className="c-text f-m">
                         وضعیت آنتن دهی :
-                        <input type="number" name="antennaStatus" min={1} max={3} id="antennaStatus" placeholder="1-3" className="form-control" onChange={inputHandler}/>
+                        <input required type="number" name="antennaStatus" min={1} max={3} id="antennaStatus" placeholder="1-3" className="form-control" onChange={inputHandler}/>
                     </label>
                 </div>
             </form>

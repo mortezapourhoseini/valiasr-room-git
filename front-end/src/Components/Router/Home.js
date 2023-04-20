@@ -10,7 +10,7 @@ function Home() {
         <section className="back-light m-2 rounded">
             <div className="container d-flex flex-column align-items-center pt-4 pb-5">
                 <h1 className="jumbotron-heading">خوش آمدید!</h1>
-                <p className="lead text-muted">شما در حال حاضر اطلاعات {stuContext.student.counter} اتاق را وارد کردید</p>
+                <p className="lead text-muted">شما در حال حاضر اطلاعات {stuContext.counter} اتاق را وارد کردید</p>
                 
                     <Link to="/room" className="c-light text-decoration-none hover-none btn btn-success text-center justify-content-center col-5 mb-4">
                         
