@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import RoomContext from "../Context/RoomContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 //components
 import RoomForm from "../RoomForm";
@@ -15,19 +15,34 @@ import StuContext from "../Context/StuContext";
 import api from "../Api/api";
 
 function Room() {
+    const navigate = useNavigate();
+    const [loggedIn, setLoggedIn] = useState(false);
+  
+    useEffect(() => {
+      const token = api.defaults.headers.Authorization;
+      setLoggedIn(token === undefined);
+  
+      if (loggedIn) {
+        navigate("/login", { replace: true });
+      }
+    }, [loggedIn, navigate]);
 
     const [room, setRoom] = useState(
         {
             college : '',
             roomNumber : '',
-            username : '',
+            user : '',
             roomTel : '',
             node : '',
             antennaStatus : '',
         }
     )
 
-    const stuContext = useContext(StuContext)
+    const stuContext = useContext(StuContext);
+
+    const [valid, setValid] = useState(true);
+
+    const [status, setStatus] = useState('wrong');
 
     let addToRoom = (name, value) =>{
         setRoom(
@@ -38,21 +53,60 @@ function Room() {
         )
     }
 
+    let apologize = (status,text)=>{
+        return (
+            <p className="mb-0 text-center border-bottom border-danger text-danger">
+                <strong>{status}</strong>
+                <br />
+                {text}
+            </p>
+        )
+    }
+
     let submitRoom = ()=>
     {
-        stuContext.plus();
+        
         
         let newRoom = {
             ...room,
-            username : stuContext.student.username,
+            user : localStorage.getItem("user"),
         };
 
         api.post('/api/room/', newRoom)
         .then(response =>{
             console.log(response);
+            if (response.status === 201) {
+                setValid(true);
+                stuContext.plus();
+                setRoom(
+                    {
+                        college : '',
+                        roomNumber : '',
+                        user : '',
+                        roomTel : '',
+                        node : '',
+                        antennaStatus : '',
+                    }
+                );
+                navigate('/');
+            }
+            else
+            {
+                setStatus('could not be saved');
+                setValid(false);
+            }
         })
         .catch(err =>{
             console.log(err);
+            if (err.response.status === 401)
+            {
+                setStatus('refresh site');
+            }
+            else if (err.response.status === 400)
+            {
+                setStatus('complete all input');
+            }
+            setValid(false);
         })
     }
 
@@ -61,23 +115,30 @@ function Room() {
             <RoomContext.Provider value={{
                 room : room,
                 addToRoom : addToRoom,
+                apologize : apologize,
             }}>
                 <RoomForm />
                 <PersonInfo />
                 <CaseInfo />
-                <OtherInfo name={'مانیتور'} data={'manitor'} />
+                <OtherInfo name={'مانیتور'} data={'monitor'} />
                 <OtherInfo name={'پرینتر'} data={'printer'} />
                 <OtherInfo name={'اسکنر'} data={'scanner'} />
                 <OtherInfo name={'چهارکاره '} data={'quadruple'} />
                 <OtherInfo name={'فکس '} data={'fax'} />
                 <OtherInfo name={'وایرلس '} data={'wireless'} />
                 <OtherInfo name={'سوییچ '} data={'switch'} />
-                <div className="footer "> 
-                    <Link to="/home" 
+                <div className="footer"> 
+                    {
+                        !valid
+                            ? <p className="mb-0 text-center border-bottom border-top border-danger text-danger">{status}</p>
+                            : ''
+                    }
+                    <button type="submit"
                             className="c-light text-decoration-none hover-none person-form rounded back-dark m-2 p-3 fs-6 fw-bold"
-                            onClick={submitRoom} >
+                            onClick={submitRoom}
+                            >
                         ثبت اتاق
-                    </Link>
+                    </button>
                 </div>
                 
             </RoomContext.Provider>

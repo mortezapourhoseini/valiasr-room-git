@@ -2,18 +2,17 @@ import React, { useContext, useState } from "react";
 
 //context
 import RoomContext from "../Context/RoomContext";
-import StuContext from "../Context/StuContext";
 
 //axios
 import api from "../Api/api";
 
-function CaseForm({nth}) {
+function CaseForm({key, counterplus}) {
 
     const [caseInfo, setCaseInfo] = useState(
         {
             college : '',
             roomNumber : '',
-            username : '',
+            user : '',
             model : '',
             idIt : '',
             propertyNum : '',
@@ -33,8 +32,11 @@ function CaseForm({nth}) {
 
     const [sub, setSub] = useState(false);
 
+    const [valid, setValid] = useState(true);
+
+    const [status, setStatus] = useState('wrong');
+
     const roomContext = useContext(RoomContext);
-    const stucontext = useContext(StuContext);
 
     let toogleSub = e =>{
         setSub(!sub);
@@ -59,24 +61,63 @@ function CaseForm({nth}) {
             ...caseInfo,
             college : roomContext.room.college,
             roomNumber : roomContext.room.roomNumber,
-            username : stucontext.student.username,
+            user : localStorage.getItem("user"),
         };
 
         api.post('/api/case/', newCaseInfo)
         .then(response =>{
             console.log(response);
+            if (response.status === 201) {
+                setValid(true);
+                counterplus();
+                toogleSub();
+                setCaseInfo(
+                    {
+                        college : '',
+                        roomNumber : '',
+                        user : '',
+                        model : '',
+                        idIt : '',
+                        propertyNum : '',
+                        os : '',
+                        cpu : '',
+                        mb : '',
+                        ram : '',
+                        power : '',
+                        ssd : '',
+                        ssdM2 : '',
+                        hdd : '',
+                        dvd : '',
+                        vga : '',
+                        soft : '',
+                    }
+                )
+
+            }
+            else
+            {
+                setStatus('could not be saved');
+                setValid(false);
+            }
         })
         .catch(err =>{
             console.log(err);
+            if (err.response.status === 401)
+            {
+                setStatus('refresh site');
+            }
+            else if (err.response.status === 400)
+            {
+                setStatus('complete all input');
+            }
+            setValid(false);
         })
-
-        console.log(caseInfo)
     }
     
     
     return (
         <div className={`person-form rounded back-gray mb-3 ${sub ? 'pb-2' : ''}`} >
-            <h4 className="back-dark c-light f-m info-title" onClick={toogleSub}>اطلاعات کیس {nth}</h4>
+            <h4 className="back-dark c-light f-m info-title" onClick={toogleSub}>افزودن کیس</h4>
                     {
                         sub 
                         ? (
@@ -139,6 +180,11 @@ function CaseForm({nth}) {
                                         <input required type="text" name="soft" id="soft" placeholder="برنامه ۱ - برنامه ۲" className="form-control" onChange={inputHandler}/>
                                     </label>
                                     <button type="submit" className="btn btn-primary" >ثبت</button>
+                                    {
+                                        !valid
+                                            ? <p className="mb-0 text-center border-bottom border-danger text-danger">{status}</p>
+                                            : ''
+                                    }
                                 </div>
                             </form>
                             )

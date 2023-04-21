@@ -1,41 +1,21 @@
 import React, { useState } from "react";
 import OtherForm from "./OtherForm";
 
-function OtherInfo({name}) {
+function OtherInfo({name, data}) {
 
-    const [views, setViews] = useState([1]);
+    const [count, setCount] = useState(0);
 
-    let numHandler = e => {
-        let n = e.target.value;
-
-        if (n >= 1 && n <= 4) {
-            const view = [];
-
-            for (let i = 1 ; i <= n ; i++)
-            {
-                view.push(i)
-            }
-
-            setViews(view);
-        }
-        else {
-            alert("Unvalid number");
-            setViews([1]);
-        }
-    }
+    let counterPlus = () =>setCount(count + 1);
 
     return (
-        <div className="person back-light m-2 p-2 rounded">
+        <div className="person back-light m-2 p-4 rounded">
             <h3 className="c-title">اطلاعات {name}ها :</h3>
-            <label htmlFor="#pNumber" className="c-text f-s">
-                تعداد {name}های داخل اتاق :
-                <input type="number" value={views.length} className="form-control" max={4} min={1} onChange={numHandler} />
-            </label>
+            <p className="c-text f-s">
+                برای این اتاق اطلاعات {count} {name} وارد شده
+            </p>
             <hr />
             <div className="area">
-                {
-                    views.map(item => <OtherForm name={name} nth={item} key={Date.now} />)
-                }
+                <OtherForm name={name} data={data} key={Date.now} /> 
             </div>
         </div>
     )

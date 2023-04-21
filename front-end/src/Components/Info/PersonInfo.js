@@ -3,39 +3,19 @@ import PersonForm from "./PersonForm";
 
 function PersonInfo() {
 
-    const [views, setViews] = useState([1]);
+    const [count, setCount] = useState(0);
 
-    let numHandler = e => {
-        let n = e.target.value;
-
-        if (n >= 1 && n <= 4) {
-            const view = [];
-
-            for (let i = 1 ; i <= n ; i++)
-            {
-                view.push(i)
-            }
-
-            setViews(view);
-        }
-        else {
-            alert("Unvalid number");
-            setViews([1]);
-        }
-    }
+    let counterPlus = () =>setCount(count + 1);
 
     return (
-        <div className="person back-light m-2 p-2 rounded">
+        <div className="person back-light m-2 p-4 rounded">
             <h3 className="c-title">اطلاعات افراد :</h3>
-            <label htmlFor="#pNumber" className="c-text f-s">
-                تعداد افراد داخل اتاق :
-                <input type="number" value={views.length} className="form-control" max={4} min={1} onChange={numHandler} />
-            </label>
+            <p className="c-text f-s">
+                برای این اتاق اطلاعات {count} نفر وارد شده
+            </p>
             <hr />
             <div className="area">
-                {
-                    views.map(item => <PersonForm nth={item} key={Date.now} />)
-                }
+                <PersonForm counterplus={counterPlus} key={Date.now} />
             </div>
         </div>
     )

@@ -90,6 +90,16 @@
 {
     .area {
         display: grid;
+        grid-template-columns: auto auto;
+        gap: 5px;
+        align-items: first baseline;
+    }
+}
+
+@media only screen and (min-width : 768px)
+{
+    .area {
+        display: grid;
         grid-template-columns: auto auto auto auto;
         gap: 5px;
         align-items: first baseline;

@@ -2,13 +2,12 @@ import React, { useContext, useState } from "react";
 
 //context
 import RoomContext from "../Context/RoomContext";
-import StuContext from "../Context/StuContext";
 
 //axios
 import api from "../Api/api";
 
 
-function OtherForm({nth, name, data}) {
+function OtherForm({name, data, counterplus}) {
 
     const [device, setDevice] = useState(
         {
@@ -17,14 +16,17 @@ function OtherForm({nth, name, data}) {
             deviceID : '',
             college : '',
             roomNumber : '',
-            username : '',
+            user : '',
         }
     )
 
     const [sub, setSub] = useState(false);
 
+    const [valid, setValid] = useState(true);
+
+    const [status, setStatus] = useState('wrong');
+
     const roomContext = useContext(RoomContext);
-    const stucontext = useContext(StuContext);
 
     let toogleSub = e =>{
         setSub(!sub);
@@ -49,23 +51,51 @@ function OtherForm({nth, name, data}) {
             deviceName : data,
             college : roomContext.room.college,
             roomNumber : roomContext.room.roomNumber,
-            username : stucontext.student.username,
+            user : localStorage.getItem("user"),
         };
-
+        
         api.post('/api/device/', newDevice)
         .then(response =>{
             console.log(response);
+            if (response.status === 201) {
+                setValid(true);
+                counterplus();
+                toogleSub();
+                setDevice(
+                    {
+                        deviceName : '',
+                        deviceModel : '',
+                        deviceID : '',
+                        college : '',
+                        roomNumber : '',
+                        user : '',
+                    }
+                )
+
+            }
+            else
+            {
+                setStatus('could not be saved');
+                setValid(false);
+            }
         })
         .catch(err =>{
             console.log(err);
+            if (err.response.status === 401)
+            {
+                setStatus('refresh site');
+            }
+            else if (err.response.status === 400)
+            {
+                setStatus('complete all input correctly');
+            }
+            setValid(false);
         })
-        
-        console.log(newDevice)
     }
 
     return (
         <div className={`person-form rounded back-gray mb-3 ${sub ? 'pb-2' : ''}`} >
-            <h4 className="back-dark c-light f-m info-title" onClick={toogleSub}>اطلاعات {name} {nth}</h4>
+            <h4 className="back-dark c-light f-m info-title" onClick={toogleSub}>افزودن {name} </h4>
                     {
                         sub 
                         ? (
@@ -80,6 +110,11 @@ function OtherForm({nth, name, data}) {
                                         <input required type="text" name="deviceID" id="deviceID" className="form-control"onChange={inputHandler}/>
                                     </label>
                                     <button type="submit" className="btn btn-primary">ثبت</button>
+                                    {
+                                        !valid
+                                            ? <p className="mb-0 text-center border-bottom border-danger text-danger">{status}</p>
+                                            : ''
+                                    }
                                 </div>
                             </form>
                             )
