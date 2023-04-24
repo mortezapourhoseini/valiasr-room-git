@@ -15,7 +15,7 @@ function OtherInfo({name, data}) {
             </p>
             <hr />
             <div className="area">
-                <OtherForm name={name} data={data} key={Date.now} /> 
+                <OtherForm name={name} data={data} key={Date.now} counterplus={counterPlus}/> 
             </div>
         </div>
     )
