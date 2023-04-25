@@ -40,15 +40,18 @@ class RoomAPI(APIView):
     def post(self, request):
         serializer = RoomSerializer(data=request.data)
         if serializer.is_valid():
-            Room.objects.create(
-                room_number=serializer.validated_data['room_number'],
-                college=serializer.validated_data['college'],
-                room_phone_number=serializer.validated_data['room_phone_number'],
-                antennaStatus=serializer.validated_data['antennaStatus'],
-                student=Student.objects.get(
-                    id=serializer.validated_data['user'])
-            )
-            Student.room_increment(serializer.validated_data['user'])
+            try:
+                room = Room.objects.get(room_number=serializer.validated_data['room_number'], college=serializer.validated_data['college'])
+            except:
+                Room.objects.create(
+                    room_number=serializer.validated_data['room_number'],
+                    college=serializer.validated_data['college'],
+                    room_phone_number=serializer.validated_data['room_phone_number'],
+                    antennaStatus=serializer.validated_data['antennaStatus'],
+                    student=Student.objects.get(
+                        id=serializer.validated_data['user'])
+                )
+                Student.room_increment(serializer.validated_data['user'])
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -60,16 +63,19 @@ class PersonAPI(APIView):
     def post(self, request):
         serializer = PersonSerializer(data=request.data)
         if serializer.is_valid():
-            Person.objects.create(
-                room=Room.objects.get(
-                    college=serializer.validated_data['college'],
-                    room_number=serializer.validated_data['room_number']
-                ),
-                first_name=serializer.validated_data['first_name'],
-                last_name=serializer.validated_data['last_name'],
-                person_id=serializer.validated_data['person_id'],
-                phone_number=serializer.validated_data['phone_number']
-            )
+            try:
+                person = Person.objects.get(first_name=serializer.validated_data['first_name'], last_name=serializer.validated_data['last_name'], )
+            except:
+                Person.objects.create(
+                    room=Room.objects.get(
+                        college=serializer.validated_data['college'],
+                        room_number=serializer.validated_data['room_number']
+                    ),
+                    first_name=serializer.validated_data['first_name'],
+                    last_name=serializer.validated_data['last_name'],
+                    person_id=serializer.validated_data['person_id'],
+                    phone_number=serializer.validated_data['phone_number']
+                )
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -81,26 +87,29 @@ class CaseAPI(APIView):
     def post(self, request):
         serializer = CaseSerializer(data=request.data)
         if serializer.is_valid():
-            Case.objects.create(
-                room=Room.objects.get(
-                    college=serializer.validated_data['college'],
-                    room_number=serializer.validated_data['room_number']
-                ),
-                model=serializer.validated_data['model'],
-                property_number=serializer.validated_data['property_number'],
-                ID_IT=serializer.validated_data['ID_IT'],
-                mb=serializer.validated_data['mb'],
-                cpu=serializer.validated_data['cpu'],
-                ram=serializer.validated_data['ram'],
-                power=serializer.validated_data['power'],
-                ssd=serializer.validated_data['ssd'],
-                ssdM2=serializer.validated_data['ssdM2'],
-                hdd=serializer.validated_data['hdd'],
-                dvd=serializer.validated_data['dvd'],
-                vga=serializer.validated_data['vga'],
-                os=serializer.validated_data['os'],
-                soft=serializer.validated_data['soft']
-            )
+            try:
+                case = Case.objects.get(model=serializer.validated_data['model'], property_number=serializer.validated_data['property_number'])
+            except:
+                Case.objects.create(
+                    room=Room.objects.get(
+                        college=serializer.validated_data['college'],
+                        room_number=serializer.validated_data['room_number']
+                    ),
+                    model=serializer.validated_data['model'],
+                    property_number=serializer.validated_data['property_number'],
+                    ID_IT=serializer.validated_data['ID_IT'],
+                    mb=serializer.validated_data['mb'],
+                    cpu=serializer.validated_data['cpu'],
+                    ram=serializer.validated_data['ram'],
+                    power=serializer.validated_data['power'],
+                    ssd=serializer.validated_data['ssd'],
+                    ssdM2=serializer.validated_data['ssdM2'],
+                    hdd=serializer.validated_data['hdd'],
+                    dvd=serializer.validated_data['dvd'],
+                    vga=serializer.validated_data['vga'],
+                    os=serializer.validated_data['os'],
+                    soft=serializer.validated_data['soft']
+                )
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -112,14 +121,17 @@ class DeviceAPI(APIView):
     def post(self, request):
         serializer = DeviceSerializer(data=request.data)
         if serializer.is_valid():
-            Device.objects.create(
-                room=Room.objects.get(
-                    college=serializer.validated_data['college'],
-                    room_number=serializer.validated_data['room_number']
-                ),
-                device_name=serializer.validated_data['device_name'],
-                model=serializer.validated_data['model'],
-                property_number=serializer.validated_data['property_number']
-            )
+            try:
+                device = Device.objects.get(model=serializer.validated_data['model'], property_number=serializer.validated_data['property_number'])
+            except:
+                Device.objects.create(
+                    room=Room.objects.get(
+                        college=serializer.validated_data['college'],
+                        room_number=serializer.validated_data['room_number']
+                    ),
+                    device_name=serializer.validated_data['device_name'],
+                    model=serializer.validated_data['model'],
+                    property_number=serializer.validated_data['property_number']
+                )
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

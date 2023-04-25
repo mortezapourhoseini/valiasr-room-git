@@ -27,7 +27,7 @@ class PersonSerializer(serializers.Serializer):
 
 class CaseSerializer(serializers.Serializer):
     college = serializers.CharField()
-    roomNumber = serializers.CharField()
+    room_number = serializers.CharField()
     model = serializers.CharField()
     ID_IT = serializers.CharField()
     property_number = serializers.CharField()
@@ -45,9 +45,9 @@ class CaseSerializer(serializers.Serializer):
 
 
 class DeviceSerializer(serializers.Serializer):
+    college = serializers.CharField()
+    room_number = serializers.CharField()
     device_name = serializers.CharField()
     model = serializers.CharField()
     property_number = serializers.CharField()
-    college = serializers.CharField()
-    room_number = serializers.CharField()
     

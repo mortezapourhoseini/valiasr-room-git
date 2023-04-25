@@ -27,12 +27,13 @@ function RoomForm() {
             user : localStorage.getItem("user"),
         };
 
+        
+
         api.post('/api/room/', newRoom)
         .then(response =>{
-            console.log(response);
+            console.log(response.data);
             if (response.status === 201) {
                 setValid(true);
-                roomContext.refreshRoom();
                 roomContext.toogleAction();
             }
             else

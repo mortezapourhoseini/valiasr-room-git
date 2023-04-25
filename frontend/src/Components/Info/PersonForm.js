@@ -11,7 +11,7 @@ function PersonForm({counterplus}) {
     const [person, setPerson] = useState(
         {
             college : '',
-            roomNumber : '',
+            room_number : '',
             first_name : '',
             last_name : '',
             person_id : '',
@@ -26,7 +26,7 @@ function PersonForm({counterplus}) {
     const [status, setStatus] = useState('wrong');
 
     const roomContext = useContext(RoomContext);
-
+    
     let toogleSub = ()=>{
         setSub(!sub);
     }
@@ -49,11 +49,10 @@ function PersonForm({counterplus}) {
         let newPerson = {
             ...person,
             college : roomContext.room.college,
-            roomNumber : roomContext.room.roomNumber,
-            user : localStorage.getItem("user"),
+            room_number : roomContext.room.room_number,
         };
 
-        api.post('/api/master/', newPerson)
+        api.post('/api/person/', newPerson)
         .then(response =>{
             console.log(response);
             if (response.status === 201) {
@@ -63,7 +62,7 @@ function PersonForm({counterplus}) {
                 setPerson(
                     {
                         college : '',
-                        roomNumber : '',
+                        room_number : '',
                         first_name : '',
                         last_name : '',
                         person_id : '',

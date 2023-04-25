@@ -67,4 +67,4 @@ class Device(models.Model):
     property_number = models.CharField(max_length=64)
 
     def __str__(self):
-        return f"{self.deviceName}: {self.property_number}"
+        return f"{self.device_name}: {self.property_number}"

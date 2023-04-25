@@ -47,15 +47,13 @@ function OtherForm({name, data, counterplus}) {
         
         let newDevice = {
             ...device,
-            deviceName : data,
+            device_name : data,
             college : roomContext.room.college,
-            roomNumber : roomContext.room.roomNumber,
-            user : localStorage.getItem("user"),
+            room_number : roomContext.room.room_number,
         };
         
         api.post('/api/device/', newDevice)
         .then(response =>{
-            console.log(response);
             if (response.status === 201) {
                 setValid(true);
                 counterplus();
@@ -78,7 +76,7 @@ function OtherForm({name, data, counterplus}) {
             }
         })
         .catch(err =>{
-            console.log(err.response.status);
+            console.log(err);
             if (err.response.status === 401)
             {
                 setStatus('refresh site');

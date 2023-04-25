@@ -11,7 +11,7 @@ function CaseForm({key, counterplus}) {
     const [caseInfo, setCaseInfo] = useState(
         {
             college : '',
-            roomNumber : '',
+            room_number : '',
             model : '',
             ID_IT : '',
             property_number : '',
@@ -59,13 +59,11 @@ function CaseForm({key, counterplus}) {
         let newCaseInfo = {
             ...caseInfo,
             college : roomContext.room.college,
-            roomNumber : roomContext.room.roomNumber,
-            user : localStorage.getItem("user"),
+            room_number : roomContext.room.room_number,
         };
 
         api.post('/api/case/', newCaseInfo)
         .then(response =>{
-            console.log(response);
             if (response.status === 201) {
                 setValid(true);
                 counterplus();
@@ -73,7 +71,7 @@ function CaseForm({key, counterplus}) {
                 setCaseInfo(
                     {
                         college : '',
-                        roomNumber : '',
+                        room_number : '',
                         model : '',
                         ID_IT : '',
                         property_number : '',
