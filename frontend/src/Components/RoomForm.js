@@ -34,11 +34,11 @@ function RoomForm() {
                     </label>
                     <label htmlFor="#roomNumber" className="c-text f-m">
                         شماره اتاق :
-                        <input required type="text" name="roomNumber" id="roomNumber" minLength={1} className="form-control" onChange={inputHandler}/>
+                        <input required type="text" name="room_number" id="roomNumber" minLength={1} className="form-control" onChange={inputHandler}/>
                     </label>
                     <label htmlFor="#roomTel" className="c-text f-m">
                         تلفن ثابت اتاق :
-                        <input required type="text" name="roomTel" id="roomTel" placeholder="مثال : 34279346" className="form-control" onChange={inputHandler}/>
+                        <input required type="text" name="room_phone_number" id="roomTel" placeholder="مثال : 34279346" className="form-control" onChange={inputHandler}/>
                     </label>
                     <label htmlFor="#node" className="c-text f-m">
                         تعداد node :

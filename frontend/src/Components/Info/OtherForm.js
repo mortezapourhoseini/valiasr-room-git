@@ -11,12 +11,11 @@ function OtherForm({name, data, counterplus}) {
 
     const [device, setDevice] = useState(
         {
-            deviceName : '',
-            deviceModel : '',
-            deviceID : '',
+            device_name : '',
+            model : '',
+            property_number : '',
             college : '',
-            roomNumber : '',
-            user : '',
+            room_number : '',
         }
     )
 
@@ -63,12 +62,11 @@ function OtherForm({name, data, counterplus}) {
                 toogleSub();
                 setDevice(
                     {
-                        deviceName : '',
-                        deviceModel : '',
-                        deviceID : '',
+                        device_name : '',
+                        model : '',
+                        property_number : '',
                         college : '',
-                        roomNumber : '',
-                        user : '',
+                        room_number : '',
                     }
                 )
 
@@ -103,11 +101,11 @@ function OtherForm({name, data, counterplus}) {
                                 <div className="form-group pe-1 room-form">
                                     <label htmlFor="#deviceModel" className="c-text f-s">
                                         مدل :
-                                        <input required type="text" name="deviceModel" id="deviceModel" className="form-control tada" onChange={inputHandler}/>
+                                        <input required type="text" name="model" id="deviceModel" className="form-control tada" onChange={inputHandler}/>
                                     </label>
                                     <label htmlFor="#deviceID" className="c-text f-s">
                                         شماره اموال :
-                                        <input required type="text" name="deviceID" id="deviceID" className="form-control"onChange={inputHandler}/>
+                                        <input required type="text" name="property_number" id="deviceID" className="form-control"onChange={inputHandler}/>
                                     </label>
                                     <button type="submit" className="btn btn-primary">ثبت</button>
                                     {

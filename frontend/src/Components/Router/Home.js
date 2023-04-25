@@ -5,14 +5,13 @@ import { useNavigate } from "react-router-dom";
 import api from "../Api/api";
 
 function Home() {
-
-  const stucontext = useContext(StuContext);  
+  const stucontext = useContext(StuContext);
 
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    const token = api.defaults.headers.Authorization
+    const token = api.defaults.headers.Authorization;
     setLoggedIn(token === undefined);
 
     if (loggedIn) {
@@ -25,7 +24,8 @@ function Home() {
       <div className="container d-flex flex-column align-items-center pt-4 pb-5">
         <h1 className="jumbotron-heading">خوش آمدید!</h1>
         <p className="lead text-muted">
-          شما در حال حاضر اطلاعات {stucontext.student.counter} اتاق را وارد کردید
+          شما در حال حاضر اطلاعات {stucontext.student.counter} اتاق را وارد
+          کردید
         </p>
 
         <Link

@@ -12,10 +12,9 @@ function CaseForm({key, counterplus}) {
         {
             college : '',
             roomNumber : '',
-            user : '',
             model : '',
-            idIt : '',
-            propertyNum : '',
+            ID_IT : '',
+            property_number : '',
             os : '',
             cpu : '',
             mb : '',
@@ -75,10 +74,9 @@ function CaseForm({key, counterplus}) {
                     {
                         college : '',
                         roomNumber : '',
-                        user : '',
                         model : '',
-                        idIt : '',
-                        propertyNum : '',
+                        ID_IT : '',
+                        property_number : '',
                         os : '',
                         cpu : '',
                         mb : '',
@@ -129,11 +127,11 @@ function CaseForm({key, counterplus}) {
                                     </label>
                                     <label htmlFor="#id-it" className="c-text f-s">
                                         ID-IT :
-                                        <input required type="text" name="idIt" id="id-it" className="form-control" onChange={inputHandler}/>
+                                        <input required type="text" name="ID_IT" id="id-it" className="form-control" onChange={inputHandler}/>
                                     </label>
                                     <label htmlFor="#num" className="c-text f-s">
                                         شماره اموال :
-                                        <input required type="text" name="propertyNum" id="num" className="form-control" onChange={inputHandler}/>
+                                        <input required type="text" name="property_number" id="num" className="form-control" onChange={inputHandler}/>
                                     </label>
                                     <label htmlFor="#system" className="c-text f-s">
                                         سیستم عامل :
@@ -161,7 +159,7 @@ function CaseForm({key, counterplus}) {
                                     </label>
                                     <label htmlFor="#SSD(M2)" className="c-text f-s">
                                         SSD(M2) :
-                                        <input type="text" name="ssdM2" id="SSD(M2)" className="form-control" onChange={inputHandler}/>
+                                        <input type="text" required name="ssdM2" id="SSD(M2)" className="form-control" onChange={inputHandler}/>
                                     </label>
                                     <label htmlFor="#H.D.D" className="c-text f-s">
                                         H.D.D :

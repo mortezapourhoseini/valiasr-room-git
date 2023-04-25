@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 
 //context
 import RoomContext from "../Context/RoomContext";
-import StuContext from "../Context/StuContext";
 
 //axios
 import api from "../Api/api";
@@ -13,11 +12,10 @@ function PersonForm({counterplus}) {
         {
             college : '',
             roomNumber : '',
-            user : '',
-            name : '',
-            family : '',
-            personId : '',
-            phone : '',
+            first_name : '',
+            last_name : '',
+            person_id : '',
+            phone_number : '',
         }
     )
 
@@ -66,11 +64,10 @@ function PersonForm({counterplus}) {
                     {
                         college : '',
                         roomNumber : '',
-                        user : '',
-                        name : '',
-                        family : '',
-                        personId : '',
-                        phone : '',
+                        first_name : '',
+                        last_name : '',
+                        person_id : '',
+                        phone_number : '',
                     }
                 )
 
@@ -107,19 +104,19 @@ function PersonForm({counterplus}) {
                                      <div className="form-group p-3 room-form">
                                          <label htmlFor="#personName" className="c-text f-s">
                                              نام فرد :
-                                             <input required type="text" name="name" id="personName" className="form-control tada" onChange={inputHandler}/>
+                                             <input required type="text" name="first_name" id="personName" className="form-control tada" onChange={inputHandler}/>
                                          </label>
                                          <label htmlFor="#personFamily" className="c-text f-s">
                                              نام خانوادگی :
-                                             <input required type="text" name="family" id="personFamily" className="form-control" onChange={inputHandler}/>
+                                             <input required type="text" name="last_name" id="personFamily" className="form-control" onChange={inputHandler}/>
                                          </label>
                                          <label htmlFor="#personId" className="c-text f-s">
                                              کد ملی :
-                                             <input required type="text" name="personId" id="personId" className="form-control" onChange={inputHandler}/>
+                                             <input required type="text" name="person_id" id="personId" className="form-control" onChange={inputHandler}/>
                                          </label>
                                          <label htmlFor="#personTel" className="c-text f-s">
                                              شماره همراه :
-                                             <input required type="text" name="phone" id="personTel" className="form-control" onChange={inputHandler}/>
+                                             <input required type="text" name="phone_number" id="personTel" className="form-control" onChange={inputHandler}/>
                                          </label>
                                          <button type="submit" className="btn btn-primary">ثبت</button>
                                          {

@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import RoomContext from "../Context/RoomContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 //components
 import RoomForm from "../RoomForm";
@@ -30,9 +30,9 @@ function Room() {
     const [room, setRoom] = useState(
         {
             college : '',
-            roomNumber : '',
+            room_number : '',
             user : '',
-            roomTel : '',
+            room_phone_number : '',
             node : '',
             antennaStatus : '',
         }
@@ -81,9 +81,9 @@ function Room() {
                 setRoom(
                     {
                         college : '',
-                        roomNumber : '',
+                        room_number : '',
                         user : '',
-                        roomTel : '',
+                        room_phone_number : '',
                         node : '',
                         antennaStatus : '',
                     }
