@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import CaseForm from "./CaseForm";
-import Submited from "./submited";
 
 function CaseInfo() {
 
