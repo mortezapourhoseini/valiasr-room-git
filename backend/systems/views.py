@@ -42,17 +42,19 @@ class RoomAPI(APIView):
         if serializer.is_valid():
             try:
                 room = Room.objects.get(room_number=serializer.validated_data['room_number'], college=serializer.validated_data['college'])
+                return Response(serializer.data, status=status.HTTP_200_OK)
             except:
                 Room.objects.create(
                     room_number=serializer.validated_data['room_number'],
                     college=serializer.validated_data['college'],
+                    node=serializer.validated_data['node'],
                     room_phone_number=serializer.validated_data['room_phone_number'],
                     antennaStatus=serializer.validated_data['antennaStatus'],
                     student=Student.objects.get(
                         id=serializer.validated_data['user'])
                 )
                 Student.room_increment(serializer.validated_data['user'])
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -76,7 +78,8 @@ class PersonAPI(APIView):
                     person_id=serializer.validated_data['person_id'],
                     phone_number=serializer.validated_data['phone_number']
                 )
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -88,7 +91,7 @@ class CaseAPI(APIView):
         serializer = CaseSerializer(data=request.data)
         if serializer.is_valid():
             try:
-                case = Case.objects.get(model=serializer.validated_data['model'], property_number=serializer.validated_data['property_number'])
+                case = Case.objects.get(property_number=serializer.validated_data['property_number'])
             except:
                 Case.objects.create(
                     room=Room.objects.get(
@@ -110,7 +113,8 @@ class CaseAPI(APIView):
                     os=serializer.validated_data['os'],
                     soft=serializer.validated_data['soft']
                 )
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -122,7 +126,7 @@ class DeviceAPI(APIView):
         serializer = DeviceSerializer(data=request.data)
         if serializer.is_valid():
             try:
-                device = Device.objects.get(model=serializer.validated_data['model'], property_number=serializer.validated_data['property_number'])
+                device = Device.objects.get(property_number=serializer.validated_data['property_number'])
             except:
                 Device.objects.create(
                     room=Room.objects.get(
@@ -133,5 +137,6 @@ class DeviceAPI(APIView):
                     model=serializer.validated_data['model'],
                     property_number=serializer.validated_data['property_number']
                 )
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

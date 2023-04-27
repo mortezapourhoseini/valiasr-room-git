@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 //components
@@ -8,13 +8,10 @@ import OtherInfo from "../Info/OtherInfo";
 
 //Context
 import StuContext from "../Context/StuContext";
-// import RoomContext from "../Context/RoomContext";
 
 function RoomInfo() {
-  // const roomContext = useContext(RoomContext);
 
   let submit = () => {
-    // roomContext.refreshRoom();
     StuContext.plus();
   };
 

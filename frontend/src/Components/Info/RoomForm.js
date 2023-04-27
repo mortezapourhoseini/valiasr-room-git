@@ -32,7 +32,7 @@ function RoomForm() {
         api.post('/api/room/', newRoom)
         .then(response =>{
             console.log(response.data);
-            if (response.status === 201) {
+            if (response.status === 201 || response.status === 200) {
                 setValid(true);
                 roomContext.toogleAction();
             }
